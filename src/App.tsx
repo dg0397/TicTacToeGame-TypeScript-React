@@ -1,4 +1,5 @@
 import React from 'react';
+import { Board } from './Board'
 import styled from 'styled-components'
 
 const BoardContainer = styled.div`
@@ -9,16 +10,11 @@ const BoardContainer = styled.div`
   box-shadow: -6px 10px 30px 4px rgba(0,0,0,.3);
   border:20px solid white;
 `
-const Board = styled.div`
-  background-color: #999;
-  width: 100%;
-  height: 100%;
-`
 
 function App() {
   return (
     <BoardContainer>
-      <Board>Test</Board>
+      <Board onGameEnd = { () => {}} />
     </BoardContainer>
   )
 }
