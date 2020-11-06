@@ -8,7 +8,7 @@ const BoardContainer = styled.div`
   width:500px;
   border-radius:16px;
   box-shadow: -6px 10px 30px 4px rgba(0,0,0,.3);
-  border:20px solid white;
+  border:15px solid white;
 `
 
 function App() {
