@@ -1,7 +1,7 @@
 import React, { FC, ReactElement } from "react";
 import styled from "styled-components";
 
-const CellContainer = styled.button`
+const CellWrapper = styled.button`
   background-color: white;
   border: none;
   box-shadow: none;
@@ -18,8 +18,8 @@ type CellProps = {
 
 export const Cell: FC<CellProps> = ({ value, toggle, index }): ReactElement => {
   return (
-    <CellContainer onClick={() => toggle(index)}>
+    <CellWrapper onClick={() => toggle(index)}>
       {value === "O" ? "O" : value ? "X" : null}
-    </CellContainer>
+    </CellWrapper>
   );
 };
