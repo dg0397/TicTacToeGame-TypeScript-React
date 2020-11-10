@@ -28,35 +28,37 @@ const winningConditions = [
 export const Board: FC<BoardProps> = ({ onGameEnd }) => {
   const [cells, setCells] = useState<CellValue[]>(Array(9).fill(undefined));
 
-  const currentShape: CellValue = cells.filter((cell) => cell).length % 2 ? "O" : "X";
+  const currentShape: CellValue =
+    cells.filter((cell) => cell).length % 2 ? "O" : "X";
 
-  const winningCondition = winningConditions.find(condition => {
-    const line = condition.map(cellIndex => cells[cellIndex]);
+  const winningCondition = winningConditions.find((condition) => {
+    const line = condition.map((cellIndex) => cells[cellIndex]);
 
-    return line[0] && line.every(cellValue => cellValue === line[0])  
-    
-  })
+    return line[0] && line.every((cellValue) => cellValue === line[0]);
+  });
 
-  const tie = cells.filter(c=>c).length === 9;
+  const tie = cells.filter((c) => c).length === 9;
 
-  const winningShape = winningCondition ? cells[winningCondition[0]] : undefined;
+  const winningShape = winningCondition
+    ? cells[winningCondition[0]]
+    : undefined;
 
-  useEffect(()=>{
-    if(winningShape){
-      return onGameEnd(winningShape)
+  useEffect(() => {
+    if (winningShape) {
+      return onGameEnd(winningShape);
     }
-    if(tie){
-      return onGameEnd('tie')
+    if (tie) {
+      return onGameEnd("tie");
     }
-  },[tie,winningShape,onGameEnd])
+  }, [tie, winningShape, onGameEnd]);
 
   const toggleCell = (index: number) => {
     setCells((cells) =>
       cells.map((cell, i) => {
-        return i === index ? currentShape : cell;
+        return i !== index ? cell : cell ? cell : currentShape;
       })
     );
-    console.log(winningShape)
+    console.log(winningShape);
   };
 
   return (

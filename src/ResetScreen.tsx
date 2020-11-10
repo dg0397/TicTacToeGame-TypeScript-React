@@ -1,22 +1,35 @@
-import React, { FC } from 'react'
-import { Winner } from './Board'
+import React, { FC } from "react";
+import styled from "styled-components";
+import { Winner } from "./Board";
 
 type ResetScreenProps = {
-    onReset():void;
-    winner: Winner
-}
+  onReset(): void;
+  winner: Winner;
+};
 
-export const ResetScreen:FC<ResetScreenProps> = ({onReset,winner}) => {
-    return (
-        <>
-            <p>
-                {
-                    winner !== 'tie'? 
-                    `The Winner is ${winner}`:
-                    `It's a tie` 
-                }
-            </p>
-            <button onClick = {onReset}>Reset</button>
-        </>
-    )
-}
+const WinnerHeading = styled.h2`
+  color: #333;
+  text-align: center;
+  margin-bottom: 2rem;
+  display: block;
+`;
+
+const ResetButton = styled.button`
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  font-weight: bold;
+  color: #333;
+  background: none;
+`;
+
+export const ResetScreen: FC<ResetScreenProps> = ({ onReset, winner }) => {
+  return (
+    <>
+      <WinnerHeading>
+        {winner !== "tie" ? `The Winner is ${winner}` : `It's a tie`}
+      </WinnerHeading>
+      <ResetButton onClick={onReset}>Reset Game</ResetButton>
+    </>
+  );
+};

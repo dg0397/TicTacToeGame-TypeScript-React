@@ -45,6 +45,7 @@ const BoardContainer = styled(motion.div).attrs(() => ({
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   background-color: white;
   border-radius: 16px;
   box-shadow: -6px 10px 30px 4px rgba(0, 0, 0, 0.3);
@@ -53,10 +54,10 @@ const BoardContainer = styled(motion.div).attrs(() => ({
 
 const Heading = styled.h1`
   color: white;
-  text-align:center;
+  text-align: center;
   margin-bottom: 1rem;
-  text-shadow: -3px 3px #00000066
-`
+  text-shadow: -3px 3px #00000066;
+`;
 type GameState = "start" | "game" | "reset";
 
 function App() {
@@ -74,7 +75,7 @@ function App() {
   };
   return (
     <>
-      <Heading>TypeScript Tic-Tac-Toe</Heading >
+      <Heading>TypeScript Tic-Tac-Toe</Heading>
       <BoardContainer animate={gameState}>
         {
           {

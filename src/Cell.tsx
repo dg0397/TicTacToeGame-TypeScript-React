@@ -42,13 +42,11 @@ type CellProps = {
 };
 
 export const Cell: FC<CellProps> = ({ value, toggle, index }): ReactElement => {
-  return (
-    <CellWrapper onClick={() => toggle(index)}>
-      {value === "O" ? (
-        <Shape animate="visible" src={circle} />
-      ) : value ? (
-        <Shape animate="visible" src={cross} />
-      ) : null}
-    </CellWrapper>
-  );
+  const cellValue =
+    value === "O" ? (
+      <Shape animate="visible" src={circle} />
+    ) : value === "X" ? (
+      <Shape animate="visible" src={cross} />
+    ) : null;
+  return <CellWrapper onClick={() => toggle(index)}>{cellValue}</CellWrapper>;
 };
