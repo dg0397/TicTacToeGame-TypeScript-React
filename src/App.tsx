@@ -58,7 +58,7 @@ const Heading = styled.h1`
   margin-bottom: 1rem;
   text-shadow: -3px 3px #00000066;
 `;
-type GameState = "start" | "game" | "reset";
+type GameState = "start" |"players-menu" | "Form1" | "Form2" | "game" | "reset";
 
 function App() {
   const [winner, setWinner] = useState<Winner>();
@@ -80,6 +80,9 @@ function App() {
         {
           {
             start: <StartScreen onStart={() => setGameState("game")} />,
+            "players-menu" : <></>,
+            Form1 : <></>,
+            Form2 : <></>,
             game: <Board onGameEnd={onGameEnd} />,
             reset: <ResetScreen winner={winner} onReset={onReset} />,
           }[gameState]
