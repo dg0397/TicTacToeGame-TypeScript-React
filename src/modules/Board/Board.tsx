@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react";
-import { Cell, CellValue } from "./Cell";
+import { Cell, CellValue } from "../../Cell";
 import styled from "styled-components";
 
 const BoardWrapper = styled.div`
@@ -58,7 +58,6 @@ export const Board: FC<BoardProps> = ({ onGameEnd }) => {
         return i !== index ? cell : cell ? cell : currentShape;
       })
     );
-    console.log(winningShape);
   };
 
   return (

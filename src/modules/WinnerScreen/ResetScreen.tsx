@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-import { Winner } from "./Board";
+import { Winner } from "../Board/Board";
 
 type ResetScreenProps = {
   onReset(): void;
