@@ -3,6 +3,7 @@ import { Board, Winner } from "./modules/Board/Board";
 import styled from "styled-components";
 import { StartScreen } from "./modules/StartScreen/StartScreen";
 import { ResetScreen } from "./modules/WinnerScreen/ResetScreen";
+import { PlayersMenu } from './modules/PlayersMenu/PlayersMenu';
 import { motion } from "framer-motion";
 
 const variants = {
@@ -72,13 +73,13 @@ const Heading = styled.h1`
 `;
 type GameState =
   | "start"
-  | "players-menu"
+  | "playersMenu"
   | "Form1"
   | "Form2"
   | "game"
   | "reset";
 
-type NumPlayers = 1 | 2 | undefined;
+export type NumPlayers = 1 | 2 | undefined;
 
 function App() {
   const [winner, setWinner] = useState<Winner>();
@@ -95,11 +96,13 @@ function App() {
     setGameState("game");
   };
 
-  const setPlayers
+  const setPlayers = (num : NumPlayers) => {
+    console.log(num)
+  }
 
   const screens = useMemo(() => ({
-    start: <StartScreen onStart={() => setGameState("game")} />,
-    "players-menu": <></>,
+    start: <StartScreen onStart={() => setGameState("playersMenu")} />,
+    playersMenu: <PlayersMenu setPlayers = {setPlayers}/>,
     Form1: <></>,
     Form2: <></>,
     game: <Board onGameEnd={onGameEnd} />,
