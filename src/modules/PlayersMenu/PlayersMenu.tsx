@@ -8,12 +8,12 @@ type PlayersMenuProps = {
 
 export const PlayersMenu: FC<PlayersMenuProps> = ({setPlayers}) => {
     const handleClick = (e:React.MouseEvent<HTMLButtonElement>) => {
-        console.log(e.target)
+        console.log(e.currentTarget.value)
     }
     return (
         <div>
-            <button value = '1'>One Player</button>
-            <button value = '2'>Two Players</button>
+            <button onClick = {handleClick} value = '1'>One Player</button>
+            <button onClick = {handleClick} value = '2'>Two Players</button>
         </div>
     )
 }

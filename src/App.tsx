@@ -12,8 +12,8 @@ const variants = {
     scale: 1,
     width: "200px",
     height: "100px",
-    "max-width": "500px",
-    "max-height": "500px",
+    maxWidth: "500px",
+    maxHeigth: "500px",
     transition: {
       type: "spring",
       duration: "0.8",
@@ -22,16 +22,16 @@ const variants = {
   hidden: {
     opacity: 0,
     scale: 0.8,
-    "max-width": "500px",
-    "max-height": "500px",
+    maxWidth: "500px",
+    maxHeight: "500px",
   },
   game: {
     opacity: 1,
     scale: 1,
     width: "80vw",
     height: "80vw",
-    "max-width": "500px",
-    "max-height": "500px",
+    maxWidth: "500px",
+    maxHeigth: "500px",
     transition: {
       type: "spring",
       duration: "0.8",
@@ -42,8 +42,8 @@ const variants = {
     scale: 1,
     width: "300px",
     height: "200px",
-    "max-width": "500px",
-    "max-height": "500px",
+    maxWidth: "500px",
+    maxHeigth: "500px",
     transition: {
       type: "spring",
       duration: "0.8",
@@ -97,7 +97,13 @@ function App() {
   };
 
   const setPlayers = (num : NumPlayers) => {
-    console.log(num)
+    if(num === 1){
+      setNumOfPlayers(num);
+      setGameState("Form1");
+    }else if( num === 2){
+      setNumOfPlayers(num);
+      setGameState("Form2");
+    }
   }
 
   const screens = useMemo(() => ({
@@ -105,9 +111,9 @@ function App() {
     playersMenu: <PlayersMenu setPlayers = {setPlayers}/>,
     Form1: <></>,
     Form2: <></>,
-    game: <Board onGameEnd={onGameEnd} />,
+    game: <Board onGameEnd={onGameEnd} numOfPLayers = {numOfPlayers}/>,
     reset: <ResetScreen winner={winner} onReset={onReset} />,
-  }),[winner]);
+  }),[winner,numOfPlayers]);
 
   const currentScreen = screens[gameState];
   return (

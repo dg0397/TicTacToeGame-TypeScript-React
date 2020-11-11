@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { Cell, CellValue } from "../../Cell";
 import styled from "styled-components";
+import { NumPlayers } from "../../App";
 
 const BoardWrapper = styled.div`
   display: grid;
@@ -15,6 +16,7 @@ const BoardWrapper = styled.div`
 export type Winner = CellValue | "tie";
 
 type BoardProps = {
+  numOfPLayers : NumPlayers;
   onGameEnd(winner: Winner): void;
 };
 
@@ -25,7 +27,7 @@ const winningConditions = [
   [0,4,8], [2,4,6] //Diagonal
 ];
 
-export const Board: FC<BoardProps> = ({ onGameEnd }) => {
+export const Board: FC<BoardProps> = ({ onGameEnd,numOfPLayers }) => {
   const [cells, setCells] = useState<CellValue[]>(Array(9).fill(undefined));
 
   const currentShape: CellValue =
