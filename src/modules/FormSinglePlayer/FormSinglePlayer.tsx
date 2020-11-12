@@ -1,28 +1,33 @@
-import React from 'react'
+import React, {FC} from 'react'
 import {useForm} from 'react-hook-form';
+import { FormProps } from '../FormTwoPlayers/FormTwoPlayers';
+
+type FormData = {
+    userShape: "X" | 'O' ;
+    userName: string;
+};
 
 
+export const FormSinglePlayer:FC<FormProps> = ({backButton}) => {
+    const {register, handleSubmit} = useForm<FormData>()
 
-export const FormTwoPlayers = () => {
-    const {register, handleSubnmit, errors} = useForm()
-
-    const onSubmit = () => {
-        
-    }
+    const onSubmit = handleSubmit(({userName,userShape})  => {
+        console.log({userName,userShape})
+    });
 
     return (
-        <form onSubmit = {handleSubnmit(onSubmit)} className = 'Form'>
+        <form onSubmit = {onSubmit} className = 'Form'>
             <label>
                 Enter your Name(default value is the value that you choice X or O)
-                <input type="text" name="x-user" id="x-user" placeholder = "Enter your Name"/>
+                <input ref = {register} type="text" name="userName" id="user-name" placeholder = "Enter your Name"/>
             </label>
             <label>
                 Do you want to be X or O
-                <input type="checkbox" name="x-user" id="x-user" placeholder = "Enter your Name"/>
-                <input type="checkbox" name="x-user" id="x-user" placeholder = "Enter your Name"/>
+                <input ref = {register} type="radio" name="userShape" id="x-user" value = 'X'/>
+                <input ref = {register} type="radio" name="userShape" id="o-user" value = "O"/>
             </label>
-            <button>Next</button>
-            <button>Back</button>
+            <input type="submit" value="Next"/>
+            <input type="button" value="back" onClick = {backButton}/>
         </form>
     )
 }

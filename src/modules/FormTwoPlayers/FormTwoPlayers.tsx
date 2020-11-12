@@ -1,27 +1,35 @@
-import React from 'react'
+import React, {FC} from 'react'
 import {useForm} from 'react-hook-form';
 
+type FormData = {
+    xUserName: string;
+    oUserName: string;
+};
+
+export type FormProps = {
+    backButton():void
+}
 
 
-export const FormTwoPlayers = () => {
-    const {register, handleSubnmit, errors} = useForm()
+export const FormTwoPlayers:FC<FormProps> = ({backButton}) => {
+    const {register, handleSubmit} = useForm<FormData>();
 
-    const onSubmit = () => {
-        
-    }
+    const onSubmit = handleSubmit(({xUserName,oUserName}) => {
+        console.log({xUserName,oUserName})
+    });
 
     return (
-        <form onSubmit = {handleSubnmit(onSubmit)} className = 'Form'>
+        <form onSubmit = {onSubmit} className = 'Form'>
             <label>
                 Who want to be X(default value is X)
-                <input type="text" name="x-user" id="x-user" placeholder = "Enter your Name"/>
+                <input ref = {register} type="text" name="xUserName" id="xUserName" placeholder = "Enter your Name" />
             </label>
             <label>
                 Who want to be O(default value is O)
-                <input type="text" name="o-user" id="o-user" placeholder = "Enter your Name"/>
+                <input ref = {register} type="text" name="oUserName" id="oUserName" placeholder = "Enter your Name"/>
             </label>
-            <button>Next</button>
-            <button>Back</button>
+            <input type="submit" value="Next"/>
+            <input type="button" value="back" onClick = {backButton}/>
         </form>
     )
 }

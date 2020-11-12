@@ -1,9 +1,11 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { Board, Winner } from "./modules/Board/Board";
 import styled from "styled-components";
 import { StartScreen } from "./modules/StartScreen/StartScreen";
 import { ResetScreen } from "./modules/WinnerScreen/ResetScreen";
 import { PlayersMenu } from './modules/PlayersMenu/PlayersMenu';
+import { FormTwoPlayers } from "./modules/FormTwoPlayers/FormTwoPlayers";
+import { FormSinglePlayer } from "./modules/FormSinglePlayer/FormSinglePlayer";
 import { motion } from "framer-motion";
 
 const variants = {
@@ -24,6 +26,42 @@ const variants = {
     scale: 0.8,
     maxWidth: "500px",
     maxHeight: "500px",
+  },
+  playersMenu: {
+    opacity: 1,
+    scale: 1,
+    width: "60%",
+    height: "200px",
+    maxWidth: "500px",
+    maxHeigth: "500px",
+    transition: {
+      type: "spring",
+      duration: "0.8",
+    }
+  },
+  form1: {
+    opacity: 1,
+    scale: 1,
+    width: "60%",
+    height: "auto",
+    maxWidth: "500px",
+    maxHeigth: "500px",
+    transition: {
+      type: "spring",
+      duration: "0.8",
+    }
+  },
+  form2: {
+    opacity: 1,
+    scale: 1,
+    width: "60%",
+    height: "auto",
+    maxWidth: "500px",
+    maxHeigth: "500px",
+    transition: {
+      type: "spring",
+      duration: "0.8",
+    }
   },
   game: {
     opacity: 1,
@@ -74,12 +112,12 @@ const Heading = styled.h1`
 type GameState =
   | "start"
   | "playersMenu"
-  | "Form1"
-  | "Form2"
+  | "form1"
+  | "form2"
   | "game"
   | "reset";
 
-export type NumPlayers = 1 | 2 | undefined;
+export type NumPlayers = "1" | "2" | undefined;
 
 function App() {
   const [winner, setWinner] = useState<Winner>();
@@ -97,23 +135,28 @@ function App() {
   };
 
   const setPlayers = (num : NumPlayers) => {
-    if(num === 1){
+    if(num === "1"){
       setNumOfPlayers(num);
-      setGameState("Form1");
-    }else if( num === 2){
+      setGameState("form1");
+    }else if( num === "2"){
       setNumOfPlayers(num);
-      setGameState("Form2");
+      setGameState("form2");
     }
-  }
+  };
+
+  const backButton = useCallback(()=> {
+      if(gameState === 'form1' || gameState === 'form2') setGameState('playersMenu');
+    },[gameState],
+  )
 
   const screens = useMemo(() => ({
     start: <StartScreen onStart={() => setGameState("playersMenu")} />,
     playersMenu: <PlayersMenu setPlayers = {setPlayers}/>,
-    Form1: <></>,
-    Form2: <></>,
+    form1: <FormSinglePlayer backButton = {backButton}/>,
+    form2: <FormTwoPlayers backButton = {backButton}/>,
     game: <Board onGameEnd={onGameEnd} numOfPLayers = {numOfPlayers}/>,
     reset: <ResetScreen winner={winner} onReset={onReset} />,
-  }),[winner,numOfPlayers]);
+  }),[winner,numOfPlayers,backButton]);
 
   const currentScreen = screens[gameState];
   return (

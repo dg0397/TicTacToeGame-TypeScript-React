@@ -8,7 +8,9 @@ type PlayersMenuProps = {
 
 export const PlayersMenu: FC<PlayersMenuProps> = ({setPlayers}) => {
     const handleClick = (e:React.MouseEvent<HTMLButtonElement>) => {
-        console.log(e.currentTarget.value)
+        const value:any= e.currentTarget.value;
+
+        setPlayers(value)
     }
     return (
         <div>
