@@ -119,10 +119,16 @@ type GameState =
 
 export type NumPlayers = "1" | "2" | undefined;
 
+export type DataUser = {
+  xUser?: 'string' | undefined;
+  oUser?: 'string ' | undefined;
+}
+
 function App() {
   const [winner, setWinner] = useState<Winner>();
   const [gameState, setGameState] = useState<GameState>("start");
   const [numOfPlayers,setNumOfPlayers] = useState<NumPlayers>()
+  const [userData,setUserData] = useState<Partial<DataUser>>({});
 
   const onGameEnd = (winner: Winner) => {
     setWinner(winner);
@@ -145,18 +151,23 @@ function App() {
   };
 
   const backButton = useCallback(()=> {
-      if(gameState === 'form1' || gameState === 'form2') setGameState('playersMenu');
-    },[gameState],
-  )
+    setGameState('playersMenu');
+    },[],
+  );
+  const nextButton = useCallback((data:Partial<DataUser>)=>{
+    setGameState('game')
+    setUserData(data)
+    },[]
+  );
 
   const screens = useMemo(() => ({
     start: <StartScreen onStart={() => setGameState("playersMenu")} />,
     playersMenu: <PlayersMenu setPlayers = {setPlayers}/>,
-    form1: <FormSinglePlayer backButton = {backButton}/>,
-    form2: <FormTwoPlayers backButton = {backButton}/>,
+    form1: <FormSinglePlayer backButton = {backButton} nextButton = {nextButton}/>,
+    form2: <FormTwoPlayers backButton = {backButton} nextButton = {nextButton}/>,
     game: <Board onGameEnd={onGameEnd} numOfPLayers = {numOfPlayers}/>,
-    reset: <ResetScreen winner={winner} onReset={onReset} />,
-  }),[winner,numOfPlayers,backButton]);
+    reset: <ResetScreen winner={winner} onReset={onReset} userData = {userData} />,
+  }),[winner,numOfPlayers,backButton,nextButton,userData]);
 
   const currentScreen = screens[gameState];
   return (

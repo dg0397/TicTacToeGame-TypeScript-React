@@ -8,11 +8,16 @@ type FormData = {
 };
 
 
-export const FormSinglePlayer:FC<FormProps> = ({backButton}) => {
+export const FormSinglePlayer:FC<FormProps> = ({backButton,nextButton}) => {
     const {register, handleSubmit} = useForm<FormData>()
 
     const onSubmit = handleSubmit(({userName,userShape})  => {
-        console.log({userName,userShape})
+        const shape = userShape === "X" ? 'xUser' : 'oUser';
+        const name = userName ? userName : userShape;
+        const data = {
+            [shape]: name
+        }
+        nextButton({...data})
     });
 
     return (
@@ -23,7 +28,7 @@ export const FormSinglePlayer:FC<FormProps> = ({backButton}) => {
             </label>
             <label>
                 Do you want to be X or O
-                <input ref = {register} type="radio" name="userShape" id="x-user" value = 'X'/>
+                <input ref = {register} type="radio" name="userShape" id="x-user" value = 'X' defaultChecked/>
                 <input ref = {register} type="radio" name="userShape" id="o-user" value = "O"/>
             </label>
             <input type="submit" value="Next"/>
