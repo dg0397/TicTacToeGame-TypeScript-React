@@ -120,8 +120,8 @@ type GameState =
 export type NumPlayers = "1" | "2" | undefined;
 
 export type DataUser = {
-  xUser?: 'string' | undefined;
-  oUser?: 'string ' | undefined;
+  xUser?: string | undefined;
+  oUser?: string | undefined;
 }
 
 function App() {
@@ -130,10 +130,12 @@ function App() {
   const [numOfPlayers,setNumOfPlayers] = useState<NumPlayers>()
   const [userData,setUserData] = useState<Partial<DataUser>>({});
 
-  const onGameEnd = (winner: Winner) => {
-    setWinner(winner);
+  const onGameEnd = useCallback((winner: Winner) => {
+    const winnerGame = winner === 'X'? userData.xUser : userData.oUser
+    setWinner(winnerGame);
     setGameState("reset");
-  };
+    },[userData.oUser,userData.xUser],
+  );
 
   const onReset = () => {
     setWinner(undefined);
@@ -165,9 +167,9 @@ function App() {
     playersMenu: <PlayersMenu setPlayers = {setPlayers}/>,
     form1: <FormSinglePlayer backButton = {backButton} nextButton = {nextButton}/>,
     form2: <FormTwoPlayers backButton = {backButton} nextButton = {nextButton}/>,
-    game: <Board onGameEnd={onGameEnd} numOfPLayers = {numOfPlayers}/>,
-    reset: <ResetScreen winner={winner} onReset={onReset} userData = {userData} />,
-  }),[winner,numOfPlayers,backButton,nextButton,userData]);
+    game: <Board onGameEnd={onGameEnd} numOfPLayers = {numOfPlayers} userData = {userData}/>,
+    reset: <ResetScreen winner={winner} onReset={onReset} />,
+  }),[winner,numOfPlayers,backButton,nextButton,onGameEnd,userData]);
 
   const currentScreen = screens[gameState];
   return (

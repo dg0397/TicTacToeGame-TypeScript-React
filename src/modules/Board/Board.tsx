@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { Cell, CellValue } from "../../Cell";
 import styled from "styled-components";
-import { NumPlayers } from "../../App";
+import { DataUser, NumPlayers } from "../../App";
 
 const BoardWrapper = styled.div`
   display: grid;
@@ -13,11 +13,12 @@ const BoardWrapper = styled.div`
   width: 100%;
 `;
 
-export type Winner = CellValue | "tie";
+export type Winner = CellValue | "tie" | string;
 
 type BoardProps = {
   numOfPLayers : NumPlayers;
   onGameEnd(winner: Winner): void;
+  userData : DataUser;
 };
 
 //prettier-ignore
@@ -27,8 +28,9 @@ const winningConditions = [
   [0,4,8], [2,4,6] //Diagonal
 ];
 
-export const Board: FC<BoardProps> = ({ onGameEnd,numOfPLayers }) => {
+export const Board: FC<BoardProps> = ({ onGameEnd,numOfPLayers,userData }) => {
   const [cells, setCells] = useState<CellValue[]>(Array(9).fill(undefined));
+  const [secondPlayerTurn,setSecondPlayerTurn] = useState<boolean>(false)
 
   const currentShape: CellValue =
     cells.filter((cell) => cell).length % 2 ? "O" : "X";
@@ -54,12 +56,27 @@ export const Board: FC<BoardProps> = ({ onGameEnd,numOfPLayers }) => {
     }
   }, [tie, winningShape, onGameEnd]);
 
+  useEffect(()=>{
+    if(numOfPLayers === '1' && secondPlayerTurn){
+      const userCellChecks = cells.map((cell,index) => {
+        if(userData.oUser === 'Computer'){
+          return cell === 'X' && index
+        }else{
+          return cell === 'O'&& index
+        }
+      }).filter(Boolean)
+      console.log(userCellChecks)
+      setSecondPlayerTurn(false)
+    }
+  },[numOfPLayers,secondPlayerTurn,cells,userData.oUser])
+
   const toggleCell = (index: number) => {
     setCells((cells) =>
       cells.map((cell, i) => {
         return i !== index ? cell : cell ? cell : currentShape;
       })
     );
+    setSecondPlayerTurn(true)
   };
 
   return (

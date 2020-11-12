@@ -1,12 +1,10 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-import { DataUser } from "../../App";
 import { Winner } from "../Board/Board";
 
 type ResetScreenProps = {
   onReset(): void;
   winner: Winner;
-  userData : Partial<DataUser>;
 };
 
 const WinnerHeading = styled.h2`
@@ -25,11 +23,11 @@ const ResetButton = styled.button`
   background: none;
 `;
 
-export const ResetScreen: FC<ResetScreenProps> = ({ onReset, winner , userData}) => {
+export const ResetScreen: FC<ResetScreenProps> = ({ onReset, winner}) => {
   return (
     <>
       <WinnerHeading>
-        {winner !== "tie" ? `The Winner is ${userData.xUser}` : `It's a tie`}
+        {winner !== "tie" ? `The Winner is ${winner}` : `It's a tie`}
       </WinnerHeading>
       <ResetButton onClick={onReset}>Reset Game</ResetButton>
     </>

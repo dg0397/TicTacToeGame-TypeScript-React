@@ -33,8 +33,8 @@ export const FormTwoPlayers:FC<FormProps> = ({backButton,nextButton}) => {
                 Who want to be O(default value is O)
                 <input ref = {register} type="text" name="oUserName" id="oUserName" placeholder = "Enter your Name" defaultValue = 'O' />
             </label>
+            <input type="button" value="Back" onClick = {backButton}/>
             <input type="submit" value="Next"/>
-            <input type="button" value="back" onClick = {backButton}/>
         </form>
     )
 }
