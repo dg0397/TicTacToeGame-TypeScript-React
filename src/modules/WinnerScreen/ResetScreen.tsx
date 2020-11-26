@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import styled from "styled-components";
-import { Winner } from "./Board";
+import { Winner } from "../Board/Board";
 
 type ResetScreenProps = {
   onReset(): void;
@@ -23,7 +23,7 @@ const ResetButton = styled.button`
   background: none;
 `;
 
-export const ResetScreen: FC<ResetScreenProps> = ({ onReset, winner }) => {
+export const ResetScreen: FC<ResetScreenProps> = ({ onReset, winner}) => {
   return (
     <>
       <WinnerHeading>
