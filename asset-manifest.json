@@ -1,24 +1,24 @@
 {
   "files": {
-    "main.css": "/static/css/main.110d3f45.chunk.css",
-    "main.js": "/static/js/main.9f5aa3bc.chunk.js",
-    "main.js.map": "/static/js/main.9f5aa3bc.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.fa255965.js",
-    "runtime-main.js.map": "/static/js/runtime-main.fa255965.js.map",
-    "static/js/2.afc4ff30.chunk.js": "/static/js/2.afc4ff30.chunk.js",
-    "static/js/2.afc4ff30.chunk.js.map": "/static/js/2.afc4ff30.chunk.js.map",
-    "static/js/3.4d77e1ae.chunk.js": "/static/js/3.4d77e1ae.chunk.js",
-    "static/js/3.4d77e1ae.chunk.js.map": "/static/js/3.4d77e1ae.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.110d3f45.chunk.css.map": "/static/css/main.110d3f45.chunk.css.map",
-    "static/js/2.afc4ff30.chunk.js.LICENSE.txt": "/static/js/2.afc4ff30.chunk.js.LICENSE.txt",
-    "static/media/circle.bd3ce232.svg": "/static/media/circle.bd3ce232.svg",
-    "static/media/cross.b7a9c534.svg": "/static/media/cross.b7a9c534.svg"
+    "main.css": "/TicTacToeGame-TypeScript-React/static/css/main.110d3f45.chunk.css",
+    "main.js": "/TicTacToeGame-TypeScript-React/static/js/main.e0c8b0e0.chunk.js",
+    "main.js.map": "/TicTacToeGame-TypeScript-React/static/js/main.e0c8b0e0.chunk.js.map",
+    "runtime-main.js": "/TicTacToeGame-TypeScript-React/static/js/runtime-main.3632fba6.js",
+    "runtime-main.js.map": "/TicTacToeGame-TypeScript-React/static/js/runtime-main.3632fba6.js.map",
+    "static/js/2.b4e9ec46.chunk.js": "/TicTacToeGame-TypeScript-React/static/js/2.b4e9ec46.chunk.js",
+    "static/js/2.b4e9ec46.chunk.js.map": "/TicTacToeGame-TypeScript-React/static/js/2.b4e9ec46.chunk.js.map",
+    "static/js/3.4fc7bd43.chunk.js": "/TicTacToeGame-TypeScript-React/static/js/3.4fc7bd43.chunk.js",
+    "static/js/3.4fc7bd43.chunk.js.map": "/TicTacToeGame-TypeScript-React/static/js/3.4fc7bd43.chunk.js.map",
+    "index.html": "/TicTacToeGame-TypeScript-React/index.html",
+    "static/css/main.110d3f45.chunk.css.map": "/TicTacToeGame-TypeScript-React/static/css/main.110d3f45.chunk.css.map",
+    "static/js/2.b4e9ec46.chunk.js.LICENSE.txt": "/TicTacToeGame-TypeScript-React/static/js/2.b4e9ec46.chunk.js.LICENSE.txt",
+    "static/media/circle.bd3ce232.svg": "/TicTacToeGame-TypeScript-React/static/media/circle.bd3ce232.svg",
+    "static/media/cross.b7a9c534.svg": "/TicTacToeGame-TypeScript-React/static/media/cross.b7a9c534.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.fa255965.js",
-    "static/js/2.afc4ff30.chunk.js",
+    "static/js/runtime-main.3632fba6.js",
+    "static/js/2.b4e9ec46.chunk.js",
     "static/css/main.110d3f45.chunk.css",
-    "static/js/main.9f5aa3bc.chunk.js"
+    "static/js/main.e0c8b0e0.chunk.js"
   ]
 }
