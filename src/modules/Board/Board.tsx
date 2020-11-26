@@ -32,8 +32,9 @@ export const Board: FC<BoardProps> = ({ onGameEnd,numOfPLayers,userData }) => {
   const [cells, setCells] = useState<CellValue[]>(Array(9).fill(undefined));
   const [secondPlayerTurn,setSecondPlayerTurn] = useState<boolean>(false)
 
-  const currentShape: CellValue =
-    cells.filter((cell) => cell).length % 2 ? "O" : "X";
+  const currentShape: CellValue = userData.xUser === 'Computer' ? 
+    cells.filter((cell) => cell).length % 2 ? "X" : "O":
+    cells.filter((cell) => cell).length % 2 ? "O" : "X" ;
 
   const winningCondition = winningConditions.find((condition) => {
     const line = condition.map((cellIndex) => cells[cellIndex]);
@@ -58,17 +59,20 @@ export const Board: FC<BoardProps> = ({ onGameEnd,numOfPLayers,userData }) => {
 
   useEffect(()=>{
     if(numOfPLayers === '1' && secondPlayerTurn){
-      const userCellChecks = cells.map((cell,index) => {
-        if(userData.oUser === 'Computer'){
-          return cell === 'X' && index
-        }else{
-          return cell === 'O'&& index
-        }
-      }).filter(Boolean)
-      console.log(userCellChecks)
-      setSecondPlayerTurn(false)
+      const timer = setTimeout(() => {
+        const possiblesCellsToCheck = cells.map( (cell,index) => cell === undefined ? index : null ).filter(Boolean)
+        const randomIndexCell = Math.floor(Math.random() * possiblesCellsToCheck.length) 
+        console.log(possiblesCellsToCheck,randomIndexCell)
+        setCells((cells) => 
+          cells.map((cell,i) => {
+            return i !== possiblesCellsToCheck[randomIndexCell] ? cell : cell ? cell : currentShape 
+          })
+        );
+        setSecondPlayerTurn(false)
+      },1000)
+      return () => clearTimeout(timer)
     }
-  },[numOfPLayers,secondPlayerTurn,cells,userData.oUser])
+  },[numOfPLayers,secondPlayerTurn,cells,currentShape])
 
   const toggleCell = (index: number) => {
     setCells((cells) =>

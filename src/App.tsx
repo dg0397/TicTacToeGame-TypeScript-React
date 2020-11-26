@@ -131,7 +131,7 @@ function App() {
   const [userData,setUserData] = useState<Partial<DataUser>>({});
 
   const onGameEnd = useCallback((winner: Winner) => {
-    const winnerGame = winner === 'X'? userData.xUser : userData.oUser
+    const winnerGame = winner === 'X'? userData.xUser :  winner === 'O'?  userData.oUser : "tie"
     setWinner(winnerGame);
     setGameState("reset");
     },[userData.oUser,userData.xUser],
