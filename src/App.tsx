@@ -132,8 +132,15 @@ function App() {
 
   const onGameEnd = useCallback((winner: Winner) => {
     const winnerGame = winner === 'X'? userData.xUser :  winner === 'O'?  userData.oUser : "tie"
-    setWinner(winnerGame);
-    setGameState("reset");
+    if(winnerGame === "Computer"){
+      setTimeout(()=>{
+        setWinner(winnerGame);
+        setGameState("reset");
+      },500)
+    }else{
+      setWinner(winnerGame);
+      setGameState("reset");
+    }
     },[userData.oUser,userData.xUser],
   );
 

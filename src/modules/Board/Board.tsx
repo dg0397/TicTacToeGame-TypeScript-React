@@ -32,8 +32,7 @@ export const Board: FC<BoardProps> = ({ onGameEnd,numOfPLayers,userData }) => {
   const [cells, setCells] = useState<CellValue[]>(Array(9).fill(undefined));
   const [secondPlayerTurn,setSecondPlayerTurn] = useState<boolean>(false)
 
-  const currentShape: CellValue = userData.xUser === 'Computer' ? 
-    cells.filter((cell) => cell).length % 2 ? "X" : "O":
+  const currentShape: CellValue = 
     cells.filter((cell) => cell).length % 2 ? "O" : "X" ;
 
   const winningCondition = winningConditions.find((condition) => {
@@ -74,13 +73,23 @@ export const Board: FC<BoardProps> = ({ onGameEnd,numOfPLayers,userData }) => {
     }
   },[numOfPLayers,secondPlayerTurn,cells,currentShape])
 
+  useEffect(()=>{
+    if(userData.xUser === "Computer"){
+      setSecondPlayerTurn(true)
+    }
+  },[userData.xUser])
+
   const toggleCell = (index: number) => {
-    setCells((cells) =>
+    if(secondPlayerTurn === false){
+      setCells((cells) =>
       cells.map((cell, i) => {
         return i !== index ? cell : cell ? cell : currentShape;
       })
     );
     setSecondPlayerTurn(true)
+    }else{
+      return
+    }
   };
 
   return (
