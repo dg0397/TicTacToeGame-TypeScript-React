@@ -44,8 +44,6 @@ const variants = {
     color: #333;
     background: none;
     transition: all .5s ease;
-    top: 50%;
-    left: 50%;
     &:hover{
         background-color: rgba(0,0,0,.2)
     }

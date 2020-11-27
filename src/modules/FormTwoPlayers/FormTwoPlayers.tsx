@@ -1,5 +1,6 @@
 import React, {FC} from 'react'
 import {useForm} from 'react-hook-form';
+import { ButtonsContainer, DirectionButton, FormComponent, LabelComponent } from '../FormSinglePlayer/FormSinglePlayer';
 
 type FormData = {
     xUserName: string;
@@ -24,17 +25,19 @@ export const FormTwoPlayers:FC<FormProps> = ({backButton,nextButton}) => {
     });
 
     return (
-        <form onSubmit = {onSubmit} className = 'Form'>
-            <label>
+        <FormComponent onSubmit = {onSubmit} className = 'Form'>
+            <LabelComponent>
                 Who want to be X(default value is X)
                 <input ref = {register} type="text" name="xUserName" id="xUserName" placeholder = "Enter your Name" defaultValue = 'X' />
-            </label>
-            <label>
+            </LabelComponent>
+            <LabelComponent>
                 Who want to be O(default value is O)
                 <input ref = {register} type="text" name="oUserName" id="oUserName" placeholder = "Enter your Name" defaultValue = 'O' />
-            </label>
-            <input type="button" value="Back" onClick = {backButton}/>
-            <input type="submit" value="Next"/>
-        </form>
+            </LabelComponent>
+            <ButtonsContainer>
+                <DirectionButton type="button" value="Back" onClick = {backButton}/>
+                <DirectionButton type="submit" value="Next"/>
+            </ButtonsContainer>
+        </FormComponent>
     )
 }
