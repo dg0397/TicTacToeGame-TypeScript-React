@@ -30,10 +30,10 @@ const variants = {
   playersMenu: {
     opacity: 1,
     scale: 1,
-    width: "60%",
+    width: "70%",
     height: "200px",
-    maxWidth: "500px",
-    maxHeigth: "500px",
+    maxWidth: "400px",
+    maxHeigth: "400px",
     transition: {
       type: "spring",
       duration: "0.8",
@@ -132,8 +132,15 @@ function App() {
 
   const onGameEnd = useCallback((winner: Winner) => {
     const winnerGame = winner === 'X'? userData.xUser :  winner === 'O'?  userData.oUser : "tie"
-    setWinner(winnerGame);
-    setGameState("reset");
+    if(winnerGame === "Computer"){
+      setTimeout(()=>{
+        setWinner(winnerGame);
+        setGameState("reset");
+      },500)
+    }else{
+      setWinner(winnerGame);
+      setGameState("reset");
+    }
     },[userData.oUser,userData.xUser],
   );
 
