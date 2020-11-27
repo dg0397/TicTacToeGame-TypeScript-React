@@ -30,10 +30,10 @@ const variants = {
   playersMenu: {
     opacity: 1,
     scale: 1,
-    width: "60%",
+    width: "70%",
     height: "200px",
-    maxWidth: "500px",
-    maxHeigth: "500px",
+    maxWidth: "400px",
+    maxHeigth: "400px",
     transition: {
       type: "spring",
       duration: "0.8",

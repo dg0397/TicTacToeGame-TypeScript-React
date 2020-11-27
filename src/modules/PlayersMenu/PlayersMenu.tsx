@@ -26,7 +26,7 @@ const variants = {
       border: "1px solid #1c1c1c",
       transition: {
         type: "spring",
-        duration: "0.5",
+        duration: "0.25",
       },
     },
   };
