@@ -3,7 +3,7 @@ import { Board, Winner } from "./modules/Board/Board";
 import styled from "styled-components";
 import { StartScreen } from "./modules/StartScreen/StartScreen";
 import { ResetScreen } from "./modules/WinnerScreen/ResetScreen";
-import { PlayersMenu } from './modules/PlayersMenu/PlayersMenu';
+import { PlayersMenu } from "./modules/PlayersMenu/PlayersMenu";
 import { FormTwoPlayers } from "./modules/FormTwoPlayers/FormTwoPlayers";
 import { FormSinglePlayer } from "./modules/FormSinglePlayer/FormSinglePlayer";
 import { motion } from "framer-motion";
@@ -37,7 +37,7 @@ const variants = {
     transition: {
       type: "spring",
       duration: "0.8",
-    }
+    },
   },
   form1: {
     opacity: 1,
@@ -49,7 +49,7 @@ const variants = {
     transition: {
       type: "spring",
       duration: "0.8",
-    }
+    },
   },
   form2: {
     opacity: 1,
@@ -61,7 +61,7 @@ const variants = {
     transition: {
       type: "spring",
       duration: "0.8",
-    }
+    },
   },
   game: {
     opacity: 1,
@@ -109,39 +109,40 @@ const Heading = styled.h1`
   margin-bottom: 1rem;
   text-shadow: -3px 3px #00000066;
 `;
-type GameState =
-  | "start"
-  | "playersMenu"
-  | "form1"
-  | "form2"
-  | "game"
-  | "reset";
+type GameState = "start" | "playersMenu" | "form1" | "form2" | "game" | "reset";
 
 export type NumPlayers = "1" | "2" | undefined;
 
 export type DataUser = {
   xUser?: string | undefined;
   oUser?: string | undefined;
-}
+};
 
 function App() {
   const [winner, setWinner] = useState<Winner>();
   const [gameState, setGameState] = useState<GameState>("start");
-  const [numOfPlayers,setNumOfPlayers] = useState<NumPlayers>()
-  const [userData,setUserData] = useState<Partial<DataUser>>({});
+  const [numOfPlayers, setNumOfPlayers] = useState<NumPlayers>();
+  const [userData, setUserData] = useState<Partial<DataUser>>({});
 
-  const onGameEnd = useCallback((winner: Winner) => {
-    const winnerGame = winner === 'X'? userData.xUser :  winner === 'O'?  userData.oUser : "tie"
-    if(winnerGame === "Computer"){
-      setTimeout(()=>{
+  const onGameEnd = useCallback(
+    (winner: Winner) => {
+      const winnerGame =
+        winner === "X"
+          ? userData.xUser
+          : winner === "O"
+          ? userData.oUser
+          : "tie";
+      if (winnerGame === "Computer") {
+        setTimeout(() => {
+          setWinner(winnerGame);
+          setGameState("reset");
+        }, 500);
+      } else {
         setWinner(winnerGame);
         setGameState("reset");
-      },500)
-    }else{
-      setWinner(winnerGame);
-      setGameState("reset");
-    }
-    },[userData.oUser,userData.xUser],
+      }
+    },
+    [userData.oUser, userData.xUser]
   );
 
   const onReset = () => {
@@ -149,34 +150,43 @@ function App() {
     setGameState("game");
   };
 
-  const setPlayers = (num : NumPlayers) => {
-    if(num === "1"){
+  const setPlayers = (num: NumPlayers) => {
+    if (num === "1") {
       setNumOfPlayers(num);
       setGameState("form1");
-    }else if( num === "2"){
+    } else if (num === "2") {
       setNumOfPlayers(num);
       setGameState("form2");
     }
   };
 
-  const backButton = useCallback(()=> {
-    setGameState('playersMenu');
-    },[],
-  );
-  const nextButton = useCallback((data:Partial<DataUser>)=>{
-    setGameState('game')
-    setUserData(data)
-    },[]
-  );
+  const backButton = useCallback(() => {
+    setGameState("playersMenu");
+  }, []);
+  const nextButton = useCallback((data: Partial<DataUser>) => {
+    setGameState("game");
+    setUserData(data);
+  }, []);
 
-  const screens = useMemo(() => ({
-    start: <StartScreen onStart={() => setGameState("playersMenu")} />,
-    playersMenu: <PlayersMenu setPlayers = {setPlayers}/>,
-    form1: <FormSinglePlayer backButton = {backButton} nextButton = {nextButton}/>,
-    form2: <FormTwoPlayers backButton = {backButton} nextButton = {nextButton}/>,
-    game: <Board onGameEnd={onGameEnd} numOfPLayers = {numOfPlayers} userData = {userData}/>,
-    reset: <ResetScreen winner={winner} onReset={onReset} />,
-  }),[winner,numOfPlayers,backButton,nextButton,onGameEnd,userData]);
+  const screens = useMemo(
+    () => ({
+      start: <StartScreen onStart={() => setGameState("playersMenu")} />,
+      playersMenu: <PlayersMenu setPlayers={setPlayers} />,
+      form1: (
+        <FormSinglePlayer backButton={backButton} nextButton={nextButton} />
+      ),
+      form2: <FormTwoPlayers backButton={backButton} nextButton={nextButton} />,
+      game: (
+        <Board
+          onGameEnd={onGameEnd}
+          numOfPLayers={numOfPlayers}
+          userData={userData}
+        />
+      ),
+      reset: <ResetScreen winner={winner} onReset={onReset} />,
+    }),
+    [winner, numOfPlayers, backButton, nextButton, onGameEnd, userData]
+  );
 
   const currentScreen = screens[gameState];
   return (

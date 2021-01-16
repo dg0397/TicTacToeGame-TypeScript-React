@@ -16,9 +16,9 @@ const BoardWrapper = styled.div`
 export type Winner = CellValue | "tie" | string;
 
 type BoardProps = {
-  numOfPLayers : NumPlayers;
+  numOfPLayers: NumPlayers;
   onGameEnd(winner: Winner): void;
-  userData : DataUser;
+  userData: DataUser;
 };
 
 //prettier-ignore
@@ -28,12 +28,16 @@ const winningConditions = [
   [0,4,8], [2,4,6] //Diagonal
 ];
 
-export const Board: FC<BoardProps> = ({ onGameEnd,numOfPLayers,userData }) => {
+export const Board: FC<BoardProps> = ({
+  onGameEnd,
+  numOfPLayers,
+  userData,
+}) => {
   const [cells, setCells] = useState<CellValue[]>(Array(9).fill(undefined));
-  const [secondPlayerTurn,setSecondPlayerTurn] = useState<boolean>(false)
+  const [secondPlayerTurn, setSecondPlayerTurn] = useState<boolean>(false);
 
-  const currentShape: CellValue = 
-    cells.filter((cell) => cell).length % 2 ? "O" : "X" ;
+  const currentShape: CellValue =
+    cells.filter((cell) => cell).length % 2 ? "O" : "X";
 
   const winningCondition = winningConditions.find((condition) => {
     const line = condition.map((cellIndex) => cells[cellIndex]);
@@ -56,37 +60,45 @@ export const Board: FC<BoardProps> = ({ onGameEnd,numOfPLayers,userData }) => {
     }
   }, [tie, winningShape, onGameEnd]);
 
-  useEffect(()=>{
-    if(numOfPLayers === '1' && secondPlayerTurn){
+  useEffect(() => {
+    if (numOfPLayers === "1" && secondPlayerTurn) {
       const timer = setTimeout(() => {
-        const possiblesCellsToCheck = cells.map( (cell,index) => cell === undefined ? index : null ).filter(Boolean)
-        const randomIndexCell = Math.floor(Math.random() * possiblesCellsToCheck.length) 
-        console.log(possiblesCellsToCheck,randomIndexCell)
-        setCells((cells) => 
-          cells.map((cell,i) => {
-            return i !== possiblesCellsToCheck[randomIndexCell] ? cell : cell ? cell : currentShape 
+        const possiblesCellsToCheck = cells
+          .map((cell, index) => (cell === undefined ? index : null))
+          .filter(Boolean);
+        const randomIndexCell = Math.floor(
+          Math.random() * possiblesCellsToCheck.length
+        );
+        console.log(possiblesCellsToCheck, randomIndexCell);
+        setCells((cells) =>
+          cells.map((cell, i) => {
+            return i !== possiblesCellsToCheck[randomIndexCell]
+              ? cell
+              : cell
+              ? cell
+              : currentShape;
           })
         );
-        setSecondPlayerTurn(false)
-      },1000)
-      return () => clearTimeout(timer)
+        setSecondPlayerTurn(false);
+      }, 1000);
+      return () => clearTimeout(timer);
     }
-  },[numOfPLayers,secondPlayerTurn,cells,currentShape])
+  }, [numOfPLayers, secondPlayerTurn, cells, currentShape]);
 
-  useEffect(()=>{
-    if(userData.xUser === "Computer"){
-      setSecondPlayerTurn(true)
+  useEffect(() => {
+    if (userData.xUser === "Computer") {
+      setSecondPlayerTurn(true);
     }
-  },[userData.xUser])
+  }, [userData.xUser]);
 
   const toggleCell = (index: number) => {
-    if(secondPlayerTurn === false){
+    if (secondPlayerTurn === false) {
       setCells((cells) =>
-      cells.map((cell, i) => {
-        return i !== index ? cell : cell ? cell : currentShape;
-      })
-    );
-    setSecondPlayerTurn(true)
+        cells.map((cell, i) => {
+          return i !== index ? cell : cell ? cell : currentShape;
+        })
+      );
+      setSecondPlayerTurn(true);
     }else{
       return
     }

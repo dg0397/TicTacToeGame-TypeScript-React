@@ -15,21 +15,21 @@ const WinnerHeading = styled.h2`
 `;
 
 const ResetButton = styled.button`
-  margin-bottom:1rem;
-    padding:.5rem;
-    border-radius:5px;
-    font-size: 2rem;
-    cursor: pointer;
-    font-weight: bold;
-    color: #333;
-    background: none;
-    transition: all .5s ease;
-    &:hover{
-        background-color: rgba(0,0,0,.2)
-    }
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border-radius: 5px;
+  font-size: 2rem;
+  cursor: pointer;
+  font-weight: bold;
+  color: #333;
+  background: none;
+  transition: all 0.5s ease;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
 `;
 
-export const ResetScreen: FC<ResetScreenProps> = ({ onReset, winner}) => {
+export const ResetScreen: FC<ResetScreenProps> = ({ onReset, winner }) => {
   return (
     <>
       <WinnerHeading>
