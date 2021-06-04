@@ -100,7 +100,12 @@ export const Board: FC<BoardProps> = ({
       );
       setSecondPlayerTurn(true);
     }else{
-      return
+      setCells((cells) =>
+        cells.map((cell, i) => {
+          return i !== index ? cell : cell ? cell : currentShape;
+        })
+      );
+      setSecondPlayerTurn(false);
     }
   };
 
