@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/TicTacToeGame-TypeScript-React/static/css/main.110d3f45.chunk.css",
-    "main.js": "/TicTacToeGame-TypeScript-React/static/js/main.5b1ce921.chunk.js",
-    "main.js.map": "/TicTacToeGame-TypeScript-React/static/js/main.5b1ce921.chunk.js.map",
+    "main.js": "/TicTacToeGame-TypeScript-React/static/js/main.a6a2c09a.chunk.js",
+    "main.js.map": "/TicTacToeGame-TypeScript-React/static/js/main.a6a2c09a.chunk.js.map",
     "runtime-main.js": "/TicTacToeGame-TypeScript-React/static/js/runtime-main.3632fba6.js",
     "runtime-main.js.map": "/TicTacToeGame-TypeScript-React/static/js/runtime-main.3632fba6.js.map",
     "static/js/2.20a22c4f.chunk.js": "/TicTacToeGame-TypeScript-React/static/js/2.20a22c4f.chunk.js",
@@ -19,6 +19,6 @@
     "static/js/runtime-main.3632fba6.js",
     "static/js/2.20a22c4f.chunk.js",
     "static/css/main.110d3f45.chunk.css",
-    "static/js/main.5b1ce921.chunk.js"
+    "static/js/main.a6a2c09a.chunk.js"
   ]
 }
