@@ -99,13 +99,15 @@ export const Board: FC<BoardProps> = ({
         })
       );
       setSecondPlayerTurn(true);
-    }else{
+    }else if (secondPlayerTurn === true && numOfPLayers === '2'){
       setCells((cells) =>
         cells.map((cell, i) => {
           return i !== index ? cell : cell ? cell : currentShape;
         })
       );
       setSecondPlayerTurn(false);
+    }else{
+      return
     }
   };
 
